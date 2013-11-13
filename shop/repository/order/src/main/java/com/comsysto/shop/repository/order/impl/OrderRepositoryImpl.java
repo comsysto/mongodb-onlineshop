@@ -34,6 +34,7 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
     @Override
     public List<Order> findAll(int limit, int offset, Sort sort) {
         Query query = Query.query(Criteria.where("_id").exists(true));
+        // TODO implement pagination
         if (sort != null) {
             query.with(sort);
         }
@@ -44,6 +45,7 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
     public List<Order> findInRange(Date fromDate, Date toDate, int limit, int offset, Sort sort) {
         Criteria criteria = Criteria.where("orderDate").gte(fromDate).lte(toDate);
         Query query = Query.query(criteria);
+        // TODO implement pagination
         if (sort != null) {
             query.with(sort);
         }
