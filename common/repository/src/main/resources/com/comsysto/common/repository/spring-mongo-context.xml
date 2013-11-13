@@ -20,6 +20,6 @@
                        threads-allowed-to-block-for-connection-multiplier="20"/>
     </mongo:mongo>
 
-    <!-- introduce fongo -->
+    <!-- TODO introduce fongo -->
 
 </beans>
