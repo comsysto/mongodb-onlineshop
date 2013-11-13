@@ -33,7 +33,7 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
 
     @Override
     public List<Order> findAll(int limit, int offset, Sort sort) {
-        Query query = Query.query(Criteria.where("_id").exists(true));
+        Query query = new Query();
         // TODO implement pagination
         if (sort != null) {
             query.with(sort);
