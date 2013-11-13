@@ -9,7 +9,6 @@ import com.comsysto.shop.repository.product.model.ProductType;
 import com.comsysto.shop.repository.user.api.UserRepository;
 import com.comsysto.shop.repository.user.model.Address;
 import com.comsysto.shop.repository.user.model.User;
-import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -76,7 +75,7 @@ public class Step2_InsertOrderTest extends AbstractJUnit4SpringContextTests {
         return orderItems;
     }
 
-    @After
+    //@After
     public void cleanUp() {
         userRepository.delete(userRepository.findByUsername("username"));
         orderRepository.delete(orderRepository.findByOrderId(123456789L));

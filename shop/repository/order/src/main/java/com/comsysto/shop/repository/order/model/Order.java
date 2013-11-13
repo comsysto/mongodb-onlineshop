@@ -1,9 +1,6 @@
 package com.comsysto.shop.repository.order.model;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,20 +11,17 @@ import java.util.List;
 /**
  * @author zutherb
  */
-@Document(collection = Order.COLLECTION_NAME)
+// TODO turn into Mongo document
 public class Order implements Serializable {
     public static final String COLLECTION_NAME = "order";
 
-    @Id
     private ObjectId id;
 
-    @Indexed(unique = true)
     private long orderId;
 
     private ObjectId userId;
     private List<OrderItem> orderItems;
 
-    @Indexed
     private Date orderDate = new Date();
 
     private DeliveryAddress deliveryAddress;
