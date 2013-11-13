@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -33,21 +34,14 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
 
     @Override
     public List<Order> findAll(int limit, int offset, Sort sort) {
-        Query query = Query.query(Criteria.where("_id").exists(true));
-        if (sort != null) {
-            query.with(sort);
-        }
-        return mongoOperations.find(query, Order.class);
+        // TODO: implement query for all orders
+        return Collections.emptyList();
     }
 
     @Override
     public List<Order> findInRange(Date fromDate, Date toDate, int limit, int offset, Sort sort) {
-        Criteria criteria = Criteria.where("orderDate").gte(fromDate).lte(toDate);
-        Query query = Query.query(criteria);
-        if (sort != null) {
-            query.with(sort);
-        }
-        return mongoOperations.find(query, Order.class);
+        // TODO: implement query for all orders in given date range
+        return Collections.emptyList();
     }
 
     @Override
