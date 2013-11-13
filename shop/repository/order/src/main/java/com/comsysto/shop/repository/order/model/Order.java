@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * @author zutherb
  */
-// TODO turn into Mongo document
 public class Order implements Serializable {
     public static final String COLLECTION_NAME = "order";
 
