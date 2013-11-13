@@ -34,7 +34,9 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
     @Override
     public List<Order> findAll(int limit, int offset, Sort sort) {
         Query query = Query.query(Criteria.where("_id").exists(true));
-        applySortAndPagination(query, limit, offset, sort);
+        if (sort != null) {
+            query.with(sort);
+        }
         return mongoOperations.find(query, Order.class);
     }
 
@@ -42,7 +44,9 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
     public List<Order> findInRange(Date fromDate, Date toDate, int limit, int offset, Sort sort) {
         Criteria criteria = Criteria.where("orderDate").gte(fromDate).lte(toDate);
         Query query = Query.query(criteria);
-        applySortAndPagination(query, limit, offset, sort);
+        if (sort != null) {
+            query.with(sort);
+        }
         return mongoOperations.find(query, Order.class);
     }
 
@@ -72,19 +76,6 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
         Criteria criteria = Criteria.where("orderId").is(orderId);
         Query query = Query.query(criteria);
         return mongoOperations.findOne(query, Order.class);
-    }
-
-    private Query applySortAndPagination(Query query, int limit, int offset, Sort sort) {
-        if (offset != 0) {
-            query.skip(offset);
-        }
-        if (limit != 0) {
-            query.limit(limit);
-        }
-        if (sort != null) {
-            query.with(sort);
-        }
-        return query;
     }
 
     @Override
