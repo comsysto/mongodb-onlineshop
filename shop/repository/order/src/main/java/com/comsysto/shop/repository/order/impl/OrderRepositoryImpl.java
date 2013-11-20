@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
  * @author zutherb
@@ -34,49 +36,47 @@ public class OrderRepositoryImpl extends AbstractRepositoryImpl<Order> implement
     @Override
     public List<Order> findAll(int limit, int offset, Sort sort) {
         Query query = new Query();
-        // TODO implement pagination
+        applySortAndPagination(query, limit, offset, sort);
+        return mongoOperations.find(query, Order.class);
+    }
+
+    private void applySortAndPagination(Query query, int limit, int offset, Sort sort) {
         if (sort != null) {
             query.with(sort);
         }
-        return mongoOperations.find(query, Order.class);
+        // TODO implement pagination
     }
 
     @Override
     public List<Order> findInRange(Date fromDate, Date toDate, int limit, int offset, Sort sort) {
-        Criteria criteria = Criteria.where("orderDate").gte(fromDate).lte(toDate);
-        Query query = Query.query(criteria);
-        // TODO implement pagination
-        if (sort != null) {
-            query.with(sort);
-        }
+        Query query = query(where("orderDate").gte(fromDate).lte(toDate));
+        applySortAndPagination(query, limit, offset, sort);
         return mongoOperations.find(query, Order.class);
     }
 
     @Override
     public Order findFirstOrder() {
-        Query query = Query.query(Criteria.where("orderDate").exists(true));
+        Query query = query(where("orderDate").exists(true));
         query.with(new Sort(Sort.Direction.ASC, "orderDate"));
         return mongoOperations.findOne(query, Order.class);
     }
 
     @Override
     public Order findLastOrder() {
-        Query query = Query.query(Criteria.where("orderDate").exists(true));
+        Query query = query(where("orderDate").exists(true));
         query.with(new Sort(Sort.Direction.DESC, "orderDate"));
         return mongoOperations.findOne(query, Order.class);
     }
 
     @Override
     public long countInRange(Date fromDate, Date toDate) {
-        Criteria criteria = Criteria.where("orderDate").gte(fromDate).lte(toDate);
-        Query query = Query.query(criteria);
+        Query query = query(where("orderDate").gte(fromDate).lte(toDate));
         return mongoOperations.count(query, Order.class);
     }
 
     @Override
     public Order findByOrderId(long orderId) {
-        Criteria criteria = Criteria.where("orderId").is(orderId);
-        Query query = Query.query(criteria);
+        Query query = query(where("orderId").is(orderId));
         return mongoOperations.findOne(query, Order.class);
     }
 
