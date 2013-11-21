@@ -52,16 +52,15 @@ public class Step3_QueryForOrdersTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFindAllSorting() {
-        int orderCount = (int) orderRepository.countAll();
         List<Order> retrievedOrders = orderRepository.findAll(10, 0, new Sort(Sort.Direction.DESC, "orderDate"));
         assertNotNull("Nothing retrieved!", retrievedOrders);
+        assertEquals("Unexpected number of retrieved orders!", 5, retrievedOrders.size());
         assertEquals("Sorting is not implemented correctly!", 55555555L, retrievedOrders.get(0).getOrderId());
-        try {
-            orderRepository.findAll(10, 0, null);
-        }
-        catch (NullPointerException e) {
-            assertNotNull("Sort=null causes NullPointerException", null);
-        }
+
+        // make sure everything still works when sort==null
+        retrievedOrders = orderRepository.findAll(10, 0, null);
+        assertNotNull("Nothing retrieved!", retrievedOrders);
+        assertEquals("Unexpected number of retrieved orders!", 5, retrievedOrders.size());
     }
 
     @Test
