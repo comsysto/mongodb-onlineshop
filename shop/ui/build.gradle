@@ -1,5 +1,8 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'application'
+
+mainClassName = "com.comsysto.shop.AppRunner"
 
 
 idea {
@@ -39,7 +42,7 @@ dependencies {
     compile project(':dataloader')
     //
 
-    testCompile jettyDeps
+    compile jettyDeps
     testCompile testDeps
 }
 
@@ -52,4 +55,8 @@ jettyRun.doFirst {
     System.setProperty("spring.profiles.active", "default")
 }
 
-task stage(dependsOn: ['jettyRun'])
+task stage(dependsOn: ['clean', 'installApp'])
+
+run {
+    args '8080'
+}

@@ -147,5 +147,3 @@ subprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '1.6'
 }
-
-task stage(dependsOn: ['clean', 'build'])
