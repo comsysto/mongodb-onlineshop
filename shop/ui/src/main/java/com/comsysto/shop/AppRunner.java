@@ -23,7 +23,7 @@ public class AppRunner {
             return;
         }
 
-        System.setProperty("spring.profiles.active", "default");
+        System.setProperty("spring.profiles.active", "test");
 
         AppRunner runner = new AppRunner(Integer.valueOf(args[0]));
         runner.startServer();

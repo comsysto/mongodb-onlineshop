@@ -44,7 +44,7 @@ dependencies {
     //
 
     compile jettyDeps
-    testCompile testDeps
+    compile testDeps
 }
 
 [jettyRun, jettyRunWar]*.with {
