@@ -1,4 +1,4 @@
-
+jar.archiveName = 'authentication-service.jar'
 
 idea {
     module {

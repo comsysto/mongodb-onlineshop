@@ -1,4 +1,4 @@
-
+jar.archiveName = 'product-service.jar'
 
 idea {
     module {

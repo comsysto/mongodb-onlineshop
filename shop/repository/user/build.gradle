@@ -1,4 +1,4 @@
-
+jar.archiveName = 'user-repository.jar'
 
 idea {
     module {

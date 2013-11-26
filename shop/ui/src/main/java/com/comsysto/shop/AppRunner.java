@@ -19,7 +19,7 @@ public class AppRunner {
 
     public static void main(final String[] args) {
         if (args.length < 1) {
-            System.out.println("JettyStart <httpport>");
+            System.out.println("AppRunner <httpport>");
             return;
         }
 
@@ -34,11 +34,9 @@ public class AppRunner {
 
         server = new Server(port);
         WebAppContext context = new WebAppContext();
-        context.setLogUrlOnStart(true);
         context.setContextPath("/pizza");
         context.setResourceBase("src/main/webapp/");
         context.setDescriptor("src/main/webapp/WEB-INF/web.xml");
-        context.setParentLoaderPriority(true);
         server.setHandler(context);
     }
 
@@ -51,17 +49,5 @@ public class AppRunner {
             LOGGER.error("Jetty Server could not be started", e);
             System.exit(100);
         }
-    }
-
-    public void stopServer(){
-        server.destroy();
-    }
-
-    public boolean isServerStarted(){
-        return server.isStarted();
-    }
-
-    public boolean isServerFailed(){
-        return server.isFailed();
     }
 }

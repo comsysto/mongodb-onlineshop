@@ -1,4 +1,4 @@
-
+jar.archiveName = 'basket-service.jar'
 
 idea {
     module {

@@ -1,6 +1,7 @@
 package com.comsysto.shop.ui.event.login;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.wicket.request.resource.DynamicImageResource;
 import org.springframework.core.io.ClassPathResource;
 
@@ -16,7 +17,7 @@ public class HomeButtonImageRessource extends DynamicImageResource {
     @Override
     protected byte[] getImageData(Attributes attributes) {
         try {
-            return FileUtils.readFileToByteArray(RESOURCE.getFile());
+            return IOUtils.toByteArray(RESOURCE.getInputStream());
         } catch (IOException e) {
             throw new IllegalStateException("file not found", e);
         }

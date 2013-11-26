@@ -1,4 +1,4 @@
-
+jar.archiveName = 'recommendation-service.jar'
 
 idea {
     module {

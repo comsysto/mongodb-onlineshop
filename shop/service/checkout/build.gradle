@@ -1,4 +1,4 @@
-
+jar.archiveName = 'checkout-service.jar'
 
 idea {
     module {
