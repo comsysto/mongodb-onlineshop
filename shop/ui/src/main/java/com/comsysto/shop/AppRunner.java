@@ -34,7 +34,8 @@ public class AppRunner {
 
         server = new Server(port);
         WebAppContext context = new WebAppContext();
-        //context.setContextPath("/pizza");
+        context.setLogUrlOnStart(true);
+        context.setContextPath("/pizza");
         context.setResourceBase("src/main/webapp/");
         context.setDescriptor("src/main/webapp/WEB-INF/web.xml");
         context.setParentLoaderPriority(true);
@@ -46,7 +47,6 @@ public class AppRunner {
             LOGGER.info("JETTY SERVER STARTING NOW ...");
             server.start();
             server.join();
-            LOGGER.info("JETTY SERVER UP AND RUNNING!");
         } catch (Exception e) {
             LOGGER.error("Jetty Server could not be started", e);
             System.exit(100);
