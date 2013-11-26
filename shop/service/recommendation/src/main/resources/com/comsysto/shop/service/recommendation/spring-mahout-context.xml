@@ -6,26 +6,6 @@
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="com.comsysto.shop.service.recommendation"/>
-
-    <import resource="classpath:com/comsysto/shop/service/product/spring-context.xml"/>
-
-    <!-- Mahout Model -->
-    <bean id="dataModel" class="org.apache.mahout.cf.taste.impl.model.mongodb.MongoDBDataModel">
-        <constructor-arg name="host" value="${mongo.host}"/>
-        <constructor-arg name="port" value="${mongo.port}"/>
-        <constructor-arg name="database" value="${mongo.db}"/>
-        <constructor-arg name="collection" value="recommendation.preference"/>
-        <constructor-arg name="mappingCollection" value="recommendation.mapping"/>
-        <constructor-arg name="manage" value="${mahout.mongodatamodel.manage}"/>
-        <constructor-arg name="finalRemove" value="${mahout.mongodatamodel.finalRemove}"/>
-        <constructor-arg name="format">
-            <null/>
-        </constructor-arg>
-        <constructor-arg name="userIDField" value="userId"/>
-        <constructor-arg name="itemIDField" value="articleId"/>
-        <constructor-arg name="preferenceField" value="preference"/>
-    </bean>
 
     <!-- recommenders -->
 
@@ -50,4 +30,46 @@
           class="org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity">
         <constructor-arg name="dataModel" ref="dataModel"/>
     </bean>
+
+
+    <!-- Mahout Model -->
+    <beans profile="heroku">
+        <bean class="com.mongodb.MongoClientURI" id="mongoUri">
+            <constructor-arg value="${MONGOSOUP_URL}"/>
+        </bean>
+        <bean id="mongoURI" class="com.mongodb.MongoURI">
+            <constructor-arg><ref local="mongoUri"/></constructor-arg>
+        </bean>
+        <bean id="dataModel" class="org.apache.mahout.cf.taste.impl.model.mongodb.MongoDBDataModel">
+            <constructor-arg name="uri" ref="mongoURI" />
+            <constructor-arg name="database" value="${mongo.db}"/>
+            <constructor-arg name="collection" value="recommendation.preference"/>
+            <constructor-arg name="mappingCollection" value="recommendation.mapping"/>
+            <constructor-arg name="manage" value="${mahout.mongodatamodel.manage}"/>
+            <constructor-arg name="finalRemove" value="${mahout.mongodatamodel.finalRemove}"/>
+            <constructor-arg name="format">
+                <null/>
+            </constructor-arg>
+            <constructor-arg name="userIDField" value="userId"/>
+            <constructor-arg name="itemIDField" value="articleId"/>
+            <constructor-arg name="preferenceField" value="preference"/>
+        </bean>
+    </beans>
+    <beans profile="default,test">
+        <bean id="dataModel" class="org.apache.mahout.cf.taste.impl.model.mongodb.MongoDBDataModel">
+            <constructor-arg name="host" value="${mongo.host}"/>
+            <constructor-arg name="port" value="${mongo.port}"/>
+            <constructor-arg name="database" value="${mongo.db}"/>
+            <constructor-arg name="collection" value="recommendation.preference"/>
+            <constructor-arg name="mappingCollection" value="recommendation.mapping"/>
+            <constructor-arg name="manage" value="${mahout.mongodatamodel.manage}"/>
+            <constructor-arg name="finalRemove" value="${mahout.mongodatamodel.finalRemove}"/>
+            <constructor-arg name="format">
+                <null/>
+            </constructor-arg>
+            <constructor-arg name="userIDField" value="userId"/>
+            <constructor-arg name="itemIDField" value="articleId"/>
+            <constructor-arg name="preferenceField" value="preference"/>
+        </bean>
+    </beans>
 </beans>
