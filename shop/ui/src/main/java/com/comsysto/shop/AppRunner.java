@@ -23,7 +23,7 @@ public class AppRunner {
             return;
         }
 
-        System.setProperty("spring.profiles.active", "test");
+        System.setProperty("spring.profiles.active", "heroku");
 
         AppRunner runner = new AppRunner(Integer.valueOf(args[0]));
         runner.startServer();

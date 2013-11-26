@@ -14,12 +14,28 @@
     </bean>
 
 
+    <beans profile="heroku">
+        <bean class="com.mongodb.MongoClientURI" id="mongoUri">
+            <constructor-arg value="${MONGOSOUP_URL}"/>
+        </bean>
+
+        <bean id="mongoURI" class="com.mongodb.MongoURI">
+            <constructor-arg><ref local="mongoUri"/></constructor-arg>
+        </bean>
+
+        <bean id="mongo" class="com.mongodb.Mongo">
+            <constructor-arg ref="mongoURI"/>
+        </bean>
+    </beans>
+
+
     <beans profile="default">
-        <mongo:mongo id="mongo" host="localhost">
+        <mongo:mongo id="mongo" host="${mongo.host}">
             <mongo:options auto-connect-retry="true"
                            threads-allowed-to-block-for-connection-multiplier="20"/>
         </mongo:mongo>
     </beans>
+
 
     <beans profile="test">
         <bean name="fongo" class="com.github.fakemongo.Fongo">

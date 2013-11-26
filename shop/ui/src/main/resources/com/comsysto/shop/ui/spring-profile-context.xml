@@ -40,7 +40,7 @@
     </bean>
 
 
-    <beans profile="default">
+    <beans profile="default,heroku">
         <context:property-placeholder system-properties-mode="OVERRIDE"
                                       ignore-resource-not-found="false"
                                       properties-ref="defaultValues"/>
