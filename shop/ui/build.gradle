@@ -3,7 +3,7 @@ apply plugin: 'jetty'
 apply plugin: 'application'
 
 mainClassName = "com.comsysto.shop.AppRunner"
-applicationName = "web"
+applicationName = "pizza-shop"
 
 
 idea {
@@ -57,7 +57,3 @@ jettyRun.doFirst {
 }
 
 task stage(dependsOn: ['clean', 'installApp'])
-
-run {
-    args '8080'
-}

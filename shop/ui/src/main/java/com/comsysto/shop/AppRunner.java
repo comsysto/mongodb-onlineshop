@@ -18,14 +18,10 @@ public class AppRunner {
     private final Server server;
 
     public static void main(final String[] args) {
-        if (args.length < 1) {
-            System.out.println("JettyStart <httpport>");
-            return;
-        }
 
         System.setProperty("spring.profiles.active", "default");
 
-        AppRunner runner = new AppRunner(Integer.valueOf(args[0]));
+        AppRunner runner = new AppRunner(8080);
         runner.startServer();
     }
 

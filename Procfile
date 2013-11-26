@@ -1,0 +1,1 @@
+web: .shop/ui/build/install/pizza-shop/bin/app
