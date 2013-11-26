@@ -1,1 +1,1 @@
-web: ./shop/ui/build/install/pizza-shop/bin/app
+web: ./shop/ui/build/install/pizza-shop/bin/pizza-shop
