@@ -1,1 +1,1 @@
-web: ./shop/ui/build/install/pizza-shop/bin/pizza-shop
+web: ./shop/ui/build/install/pizza-shop/bin/pizza-shop $PORT
