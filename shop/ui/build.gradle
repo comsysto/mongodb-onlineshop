@@ -51,3 +51,5 @@ dependencies {
 jettyRun.doFirst {
     System.setProperty("spring.profiles.active", "default")
 }
+
+task stage(dependsOn: ['jettyRun'])
