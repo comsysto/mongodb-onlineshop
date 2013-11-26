@@ -13,9 +13,6 @@
                 <prop key="generator.drop.collections">0</prop>
                 <prop key="generator.generationJob.rate">0</prop>
                 <prop key="mongo.db">cc_fWxetrESZuKp</prop>
-                <prop key="mahout.mongodatamodel.manage">false</prop>
-                <prop key="mahout.mongodatamodel.finalRemove">false</prop>
-                <prop key="mahout.mongodatamodel.nearestNUserNeighborhood.n">5</prop>
             </props>
         </property>
     </bean>
@@ -30,9 +27,6 @@
                 <prop key="mongo.db">pizza</prop>
                 <prop key="mongo.host">localhost</prop>
                 <prop key="mongo.port">27017</prop>
-                <prop key="mahout.mongodatamodel.manage">false</prop>
-                <prop key="mahout.mongodatamodel.finalRemove">false</prop>
-                <prop key="mahout.mongodatamodel.nearestNUserNeighborhood.n">5</prop>
             </props>
         </property>
     </bean>
@@ -47,9 +41,6 @@
                 <prop key="mongo.db">pizza</prop>
                 <prop key="mongo.host">localhost</prop>
                 <prop key="mongo.port">27017</prop>
-                <prop key="mahout.mongodatamodel.manage">false</prop>
-                <prop key="mahout.mongodatamodel.finalRemove">false</prop>
-                <prop key="mahout.mongodatamodel.nearestNUserNeighborhood.n">5</prop>
             </props>
         </property>
     </bean>

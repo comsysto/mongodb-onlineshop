@@ -9,7 +9,6 @@
     <context:component-scan base-package="com.comsysto.shop.service.recommendation"/>
 
     <import resource="classpath:com/comsysto/shop/service/product/spring-context.xml"/>
-    <import resource="spring-mahout-context.xml"/>
 
 
     <bean id="testValues" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
