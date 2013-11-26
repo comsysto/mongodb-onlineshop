@@ -5,6 +5,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean id="herokuValues" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="authentication.salt">4e6ab01864d726077691caa0d19a2d3f</prop>
+                <prop key="generator.generate.orders">100</prop>
+                <prop key="generator.drop.collections">0</prop>
+                <prop key="generator.generationJob.rate">0</prop>
+                <prop key="mongo.db">cc_fWxetrESZuKp</prop>
+                <prop key="mahout.mongodatamodel.manage">false</prop>
+                <prop key="mahout.mongodatamodel.finalRemove">false</prop>
+                <prop key="mahout.mongodatamodel.nearestNUserNeighborhood.n">5</prop>
+            </props>
+        </property>
+    </bean>
+
     <bean id="defaultValues" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
@@ -40,7 +55,14 @@
     </bean>
 
 
-    <beans profile="default,heroku">
+
+
+    <beans profile="heroku">
+        <context:property-placeholder system-properties-mode="OVERRIDE"
+                                      ignore-resource-not-found="false"
+                                      properties-ref="herokuValues"/>
+    </beans>
+    <beans profile="default">
         <context:property-placeholder system-properties-mode="OVERRIDE"
                                       ignore-resource-not-found="false"
                                       properties-ref="defaultValues"/>
